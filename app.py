@@ -20,7 +20,7 @@ def chatbot():
 def generate_response(message):
     greetings = ["hi", "hello", "hey"]
     if message.lower() in greetings:
-        return "Hello, how can I assist you?"
+        return "Hello, I'm a trademark registration assistant Domeno!"
     else:
         return "I'm sorry, I don't understand what you're saying."
 

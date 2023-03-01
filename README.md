@@ -1,1 +1,2 @@
-# domeno
+# Domeno
+## Intelligent trademark registration assistant

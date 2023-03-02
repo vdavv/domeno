@@ -121,76 +121,18 @@
 <body>
 <div id="chatbot" class="hidden">
     <div class="header">
-        <h3>Chatbot</h3>
-        <button id="chatbot-toggle">Close</button>
+        <h3>Domeno</h3>
+        <button id="chatbot-toggle">Open</button>
     </div>
-    <div class="content"></div>
+    <div class="content">
+        <!-- chat messages here -->
+    </div>
     <div class="input">
-        <form>
-            <input type="text" placeholder="Type your message here" autocomplete="off">
-            <button type="submit">Send</button>
-        </form>
+        <input type="text" placeholder="Type your message...">
+        <button type="submit">Send</button>
     </div>
 </div>
 <script>
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     var chatbot = document.getElementById('chatbot');
-    //     var chatbotToggle = document.getElementById('chatbot-toggle');
-    //
-    //     // send welcome message when page loads
-    //     var request = new XMLHttpRequest();
-    //     request.open('POST', '/chatbot');
-    //     request.setRequestHeader('Content-Type', 'application/json');
-    //     request.onload = function () {
-    //         if (request.status === 200) {
-    //             var response = JSON.parse(request.responseText);
-    //             appendChatMessage(response.message, 'chatbot');
-    //             chatbot.classList.remove('hidden');
-    //         }
-    //     };
-    //     request.send(JSON.stringify({message: 'init'}));
-    //
-    //     // event listener for chatbot toggle button
-    //     chatbotToggle.addEventListener('click', function () {
-    //         chatbot.classList.toggle('hidden');
-    //         if (chatbot.classList.contains('hidden')) {
-    //             chatbotToggle.textContent = 'Open';
-    //         } else {
-    //             chatbotToggle.textContent = 'Close';
-    //         }
-    //     });
-    // });
-    //
-    // function appendChatMessage(message, sender) {
-    //     var chatbotContent = document.querySelector('#chatbot .content');
-    //     var chatMessage = document.createElement('div');
-    //     chatMessage.classList.add('chat-message');
-    //     chatMessage.classList.add(sender);
-    //     chatMessage.textContent = message;
-    //     chatbotContent.appendChild(chatMessage);
-    //     chatbotContent.scrollTop = chatbotContent.scrollHeight;
-    // }
-    //
-    // var chatbotInput = document.querySelector('#chatbot .input input[type="text"]');
-    // var chatbotForm = document.querySelector('#chatbot .input');
-    // chatbotForm.addEventListener('submit', function (event) {
-    //     event.preventDefault();
-    //     var message = chatbotInput.value.trim();
-    //     if (message !== '') {
-    //         appendChatMessage(message, 'you');
-    //         chatbotInput.value = '';
-    //         var request = new XMLHttpRequest();
-    //         request.open('POST', '/chatbot');
-    //         request.setRequestHeader('Content-Type', 'application/json');
-    //         request.onload = function () {
-    //             if (request.status === 200) {
-    //                 var response = JSON.parse(request.responseText);
-    //                 appendChatMessage(response.message, 'chatbot');
-    //             }
-    //         };
-    //         request.send(JSON.stringify({message: message}));
-    //     }
-    // });
     document.addEventListener('DOMContentLoaded', function () {
         var chatbot = document.getElementById('chatbot');
         var chatbotToggle = document.getElementById('chatbot-toggle');
@@ -204,33 +146,9 @@
                 var response = JSON.parse(request.responseText);
                 appendChatMessage(response.message, 'chatbot');
                 chatbot.classList.remove('hidden');
-                if (response.next_message) {
-                    setTimeout(function () {
-                        appendChatMessage(response.next_message, response.next_sender);
-                    }, 2000);
-                }
             }
         };
         request.send(JSON.stringify({message: 'init'}));
-
-        // send second welcome message after a delay
-        // setTimeout(function () {
-        //     var request2 = new XMLHttpRequest();
-        //     request2.open('POST', '/chatbot');
-        //     request2.setRequestHeader('Content-Type', 'application/json');
-        //     request2.onload = function () {
-        //         if (request2.status === 200) {
-        //             var response = JSON.parse(request2.responseText);
-        //             appendChatMessage(response.message, 'chatbot');
-        //             if (response.next_message) {
-        //                 setTimeout(function () {
-        //                     appendChatMessage(response.next_message, response.next_sender);
-        //                 }, 1000);
-        //             }
-        //         }
-        //     };
-        //     request2.send(JSON.stringify({message: 'init'}));
-        // }, 2000);
 
         // event listener for chatbot toggle button
         chatbotToggle.addEventListener('click', function () {
@@ -268,12 +186,6 @@
                 if (request.status === 200) {
                     var response = JSON.parse(request.responseText);
                     appendChatMessage(response.message, 'chatbot');
-                    if (response.next_message) {
-                        setTimeout(function () {
-                            appendChatMessage(response.next_message, response.next_sender);
-                        }, 1500);
-                        // delay in ms between second bot message is above
-                    }
                 }
             };
             request.send(JSON.stringify({message: message}));
@@ -282,3 +194,4 @@
 </script>
 </body>
 </html>
+
